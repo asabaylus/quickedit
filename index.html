@@ -2,10 +2,10 @@
 <html lang="en">
 
   <head>
-  
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-      
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, x-minimal-ui"/> 
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, x-minimal-ui"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
 
     <meta http-equiv="Pragma" content="no-cache"/>
@@ -15,7 +15,7 @@
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -23,62 +23,69 @@
     <link rel="apple-touch-icon" sizes="72x72" href="res/icon/ios/icon-72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="res/icon/ios/icon-72-2x.png" />
 
+    <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="static/themes/magic.nik.bootstrap.min.css"/>
     <link rel="stylesheet" href="static/main.css"/>
 
     <title>QuickEdit - Web based text / source code editor with AES encryption and Dropbox integration</title>
     <meta name="description" content="Web based text/code editor with Passphrase based 256bit text encryption and Dropbox support." />
     <meta name="keywords" content="web based editor, online code editor, online ide, encryption, cryptography, secure, encode, password, passphrase, encrypt, dropbox, decrypt, aes" />
-    
+
   </head>
 
   <body>
-  
+
   <div id="splashscreen">
     <img id="splashimage" src="static/images/icon-128x128.png" alt="Splash page icon"/>
   </div>
 
   <div class="page">
     <div class="container" id="container">
-    
+
       <div class="row">
-        <h3 class="pull-left"><img src="static/images/icon-36x36.png" class="shift-up-5" alt="Icon"/> QuickEdit</h3> 
-        <div class="btn-group pull-right top-buffer shift-dn-5">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#about">About</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#help">?</button>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-9 col-xs-offset-1">
+            <h3 class="text-center" id="splashtitle">
+                <img width="150" src="static/images/quickedit-logo.png" class="shift-up-5" alt="Icon"/>
+                 QuickEdit
+            </h3>
         </div>
       </div>
 
+      <div class="btn-group pull-right absolute-top-right">
+        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#about">About</button>
+        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#help"><span class="sr-only">Help</span>?</button>
+      </div>
+
       <div class="row">
-        <p class="text-primary small">Text editor with 256bit encryption & Dropbox support</p>
+        <p class="text-primary small text-center">Text editor with 256-bit encryption & Dropbox support</p>
       </div>
 
       <form role="form">
         <div class="row">
-          <div class="form-group" id="passGroup">
-            <label for="password">Passphase</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Passphrase - a single word or sentence">
-            <input type="password" id="password2" name="password2" class="form-control" placeholder="Repeat please. It's important">
-            <div class="alert alert-danger hidden" id="passwordError">The passphrases do not match. I could pick one at random if you like?</div>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 ">
+              <div class="form-group" id="passGroup">
+                <label for="password">Passphase</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Passphrase - a single word or sentence">
+                <br/>
+                <input type="password" id="password2" name="password2" class="form-control" placeholder="Repeat please. It's important">
+                <div class="alert alert-danger hidden" id="passwordError">The passphrases do not match. I could pick one at random if you like?</div>
+              </div>
           </div>
         </div>
-        <div class="row">
-            <button id="encrypt" type="button" class="btn btn-success pull-left">Encrypt</button>
-            <button id="decrypt" type="button" class="btn btn-warning pull-right">Decrypt</button>
-        </div>
+
         <div class="row top-buffer">
           <div class="form-group">
-            <div class="pull-left">
-              <label for="message">Message</label> <span class="badge" id="count">0</span>
+            <div class="col-sm-2">
+              <label for="message">Message</label> <span class="badge badge-yellow" id="count">0</span>
             </div>
-            <div class="btn-group pull-right">
-              <button id="clearMessage" type="button" class="btn btn-default btn-xs">Clear</button>
-              
-              <span class="btn-group desktop hidden">
+            <div class="btn-group col-sm-10">
+                <span class="btn-group pull-right desktop hidden">
+
+                <button id="clearMessage" type="button" class="btn btn-default btn-xs">Clear</button>
                 <button id="keyMapVim" type="button" class="btn btn-default btn-xs">Mode: Vim</button>
                 <div class="btn-group">
                   <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-                    Theme: <span id="cm-select-theme-btn">Default</span> 
+                    Theme: <span id="cm-select-theme-btn">Default</span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-right">
@@ -96,7 +103,7 @@
                 </div>
                 <div class="btn-group">
                   <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-                    Syntax: <span id="cm-select-mode-btn">None</span> 
+                    Syntax: <span id="cm-select-mode-btn">None</span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-right">
@@ -151,39 +158,47 @@
                     <li><a href="#" class="cm-select-mode" data-id="yaml" data-mode="text/x-yaml">Yaml</a></li>
                   </ul>
                 </div>
+                <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown">
+                    Dropbox
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" id="dbChooseFile">Open</a></li>
+                    <li><a href="#" id="dbSaveFile">Save</a></li>
+                </ul>
+                <button id="logout" type="button" class="btn btn-danger btn-xs hidden"><span class="glyphicon glyphicon-log-out"></span></button>
               </span>
-              
-              <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown">
-                Dropbox
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#" id="dbChooseFile">Open</a></li>
-                <li><a href="#" id="dbSaveFile">Save</a></li>
-              </ul>
-              <button id="logout" type="button" class="btn btn-danger btn-xs hidden"><span class="glyphicon glyphicon-log-out"></span></button>
+
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="form-group">
+          <div class="col-xs-12">
             <div><strong>File:</strong> <span id="filePath">New</span></div>
               <textarea rows="5" id="message" name="message" class="form-control" placeholder="Plain text message to encrypt, or encrypted message to decrypt"></textarea>
           </div>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-default btn-xs pull-left" data-toggle="modal" data-target="#disclaimer">Disclaimer</button>
-          <button id="backToTop" type="button" class="btn btn-info btn-xs pull-right">Back to Top</button>
+            <div class="col-xs-12 top-buffer">
+                <button type="button" class="btn btn-default btn-xs pull-left" data-toggle="modal" data-target="#disclaimer">Disclaimer</button>
+                <button id="backToTop" type="button" class="btn btn-info btn-xs pull-right">Back to Top</button>
+            </div>
         </div>
       </form>
-      
-      <div class="text-center text-muted small">
+      <div class="row text-center">
+          <div class="btn-group text-center" role="group" aria-label="Toggle encryption">
+              <button id="encrypt" type="button" class="btn btn-success">Encrypt</button>
+              <button id="decrypt" type="button" class="btn btn-warning">Decrypt</button>
+          </div>
+      </div>
+
+      <div class="text-center text-muted small top-buffer">
         &copy; 2015 <a href="http://khilnani.org" target="_blank">Nik Khilnani</a> | <a href="http://twitter.com/nikkhilnani" target="_blank">@nikkhilnani</a>
       </div>
-      
+
     </div>
   </div>
-  
+
   <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -192,12 +207,12 @@
           <h4 class="modal-title text-primary">Help</h4>
         </div>
         <div class="modal-body">
-        
+
           <div class="well well-sm">
           <h4>Dropbox</h4>
             <p class="text-danger small">If using the Dropbox integration, do not forget to log out by clicking the red Log Out / <span class="glyphicon glyphicon-log-out"></span> button after using the application.</p>
           </div>
-          
+
           <dl class="list-inline">
             <dt>Passphrase</dt>
               <dl>
@@ -211,11 +226,11 @@
               </dl>
             <dt>Encrypt / Decrypt</dt>
               <dl>
-              Based on the task you would like to perform, this buttons will encrypt or decrypt the text message. 
+              Based on the task you would like to perform, this buttons will encrypt or decrypt the text message.
               If the two passphrases do not match, encryption or decryption will not occur and you will see an warning message.
               </dl>
           </dl>
-          
+
           <h4 class="text-primary">A few suggestions</h4>
           <ol>
             <li>You can encrypt text more than once. Just click the encrypt button a few times. To decrypt, click the decrypt button multiple times till you see your original text.</li>
@@ -225,7 +240,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -235,13 +250,13 @@
         </div>
         <div class="modal-body">
           <div class="text-center">
-            <img src="static/images/icon-100x100.png" alt="Icon"/> 
+            <img src="static/images/icon-100x100.png" alt="Icon"/>
           </div>
           <p class="top-buffer">
           <span class="text-primary">QuickEdit</span> is a web based text/code editor with Passphrase based 256bit text encryption and Dropbox support.
           Content may be encrypted multiple times, with different passphrases, adding multiple layers of encryption.
           </p>
-          
+
           <div class="well well-sm top-buffer">
           <h4>Disclaimer</h4>
             <p class="text-danger small">Use at your own risk. You may not hold the authors of this website liable for loss of data, legal issues, death or any kind of damages as a result of using this website. A professional hacker might be able to decrypt text encrypted by this website. If you forget your passphrase, we will not be able to help you decrypt your message.</p>
@@ -252,7 +267,7 @@
 
           <h4 class="text-primary">Suggestions?</h4>
           <p>You may review the source code for this application at <a href="https://github.com/khilnani/QuickEdit" target="_blank">Github</a>. Please email <a href="mailto:info@QuickEdit.org">info@QuickEdit.org</a> with suggestions or bugs.</p>
-          
+
           <h4 class="text-primary">Third-Party Licenses</h4>
           <p>
             <ol>
@@ -266,12 +281,12 @@
               <li><a target="_blank" href="http://requirejs.org/">RequireJS</a> - <a target="_blank" href="https://github.com/jrburke/requirejs/blob/master/LICENSE">MIT</a></li>
             </ol>
           </p>
-          
+
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="disclaimer" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -283,19 +298,19 @@
           <p><span class="text-primary">QuickEdit</span> is a web based text/code editor with Passphrase based 256bit text encryption and Dropbox support.
           Content may be encrypted multiple times, with different passphrases, adding multiple layers of encryption.
           </p>
-          
+
           <div class="well well-sm top-buffer">
           <h4>Disclaimer</h4>
             <p class="text-danger small">Use at your own risk. You may not hold the authors of this website liable for loss of data, legal issues, death or any kind of damages as a result of using this website. A professional hacker might be able to decrypt text encrypted by this website. If you forget your passphrase, we will not be able to help you decrypt your message.</p>
           </div>
-          
+
           <h4 class="text-primary">Suggestions?</h4>
           <p>You may review the source code for this application at <a href="https://github.com/khilnani/QuickEdit" target="_blank">Github</a>. Please email <a href="mailto:info@QuickEdit.org">info@QuickEdit.org</a> with suggestions or bugs.</p>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="dropbox" tabindex="-1" role="dialog" data-keyboard="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -316,10 +331,10 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  
+
     ga('create', 'UA-24322958-19', 'quickedit.org');
     ga('send', 'pageview');
-  
+
   </script>
 
   </body>
